@@ -287,3 +287,23 @@
     });
 
 })();
+
+const slider = document.querySelector('.slider');
+const slides = document.querySelectorAll('.slide');
+let slideWidth = slides[0].clientWidth;
+let currentIndex = 0;
+
+function slideNext() {
+    if (currentIndex === slides.length - 1) {
+        currentIndex = 0;
+    } else {
+        currentIndex++;
+    }
+    updateSliderPosition();
+}
+
+function updateSliderPosition() {
+    slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+}
+
+setInterval(slideNext, 3000);

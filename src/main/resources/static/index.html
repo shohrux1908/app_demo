@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles.css">
+	<title>Chiroqli Slider</title>
+	<style>
+		body {
+			margin: 0;
+			font-family: Arial, sans-serif;
+			background-color: #f0f0f0;
+		}
+
+		.slider-container {
+			overflow: hidden;
+			width: 100%;
+			max-width: 1050px;
+			margin: 20px auto;
+			box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+			border-radius: 10px;
+			display: flex; /* Flex containerni qo'shamiz */
+		}
+
+		.slider {
+			display: flex;
+			transition: transform 0.5s ease-in-out;
+		}
+
+		.slide {
+			flex: 0 0 100%;
+		}
+
+		.slide img {
+			width: 100%;
+			height: auto;
+			border-radius: 10px;
+			box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		/* Yangi CSS qismi */
+		.slider-container:hover .slider {
+			animation: slide 15s infinite linear; /* 15s davom etuvchi animatsiya */
+		}
+
+		@keyframes slide {
+			0% {
+				transform: translateX(0%);
+			}
+			100% {
+				transform: translateX(-100%);
+			}
+		}
+	</style>
+
+</head>
+<body>
+<div class="slider-container">
+	<div class="slider">
+		<div class="slide"><img src="/static/images/nammqihostel2.jpg" alt="Slide 1"></div>
+		<div class="slide"><img src="image2.jpg" alt="Slide 2"></div>
+		<div class="slide"><img src="image3.jpg" alt="Slide 3"></div>
+		<!-- Add duplicate of the first slide for seamless looping -->
+		<div class="slide"><img src="/static/images/nammqihostel2.jpg" alt="Slide 1"></div>
+	</div>
+</div>
+
+</div>
+<script>
+	function slideNext() {
+		if (currentIndex === slides.length - 1) {
+			currentIndex = 0;
+		} else {
+			currentIndex++;
+		}
+		updateSliderPosition();
+	}
+
+	function slidePrev() {
+		if (currentIndex === 0) {
+			currentIndex = slides.length - 1;
+		} else {
+			currentIndex--;
+		}
+		updateSliderPosition();
+	}
+
+	let interval = setInterval(slideNext, 3000);
+
+	sliderContainer.addEventListener('mouseover', () => {
+		clearInterval(interval);
+	});
+
+	sliderContainer.addEventListener('mouseout', () => {
+		interval = setInterval(slideNext, 3000);
+	});
+
+	// Saqlangan sliderning yangilash funksiyasi
+	function updateSliderPosition() {
+		// Sliderning chap va o'ng qismi
+		const leftSide = slides.slice(0, currentIndex);
+		const rightSide = slides.slice(currentIndex);
+		// Yangi tartibda slider qo'yish
+		const newSlidesOrder = [...rightSide, ...leftSide];
+		slider.innerHTML = ''; // Eski slider HTML-ni tozalash
+		newSlidesOrder.forEach(slide => {
+			slider.appendChild(slide);
+		});
+	}
+
+	// Saqlangan sliderning o'lchamini yangilash funksiyasi
+	function updateSlideWidth() {
+		slideWidth = slides[0].clientWidth;
+		slider.style.width = `${slideWidth * slides.length}px`;
+	}
+
+	// Saqlangan sliderning o'lchamini yangilash
+	updateSlideWidth();
+
+	// Oyna o'zgarishida sliderning o'lchamini ham yangilash
+	window.addEventListener('resize', updateSlideWidth);
+
+</script>
+
+</body>
+</html>

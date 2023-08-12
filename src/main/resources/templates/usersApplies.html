@@ -1,0 +1,274 @@
+
+<html>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="/static/css/style2.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/static/css/style.css"> <!-- CSS faylni chaqirish -->
+
+
+
+<body>
+
+<header id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+        <a href="#" class="logo d-flex align-items-center">
+            <img src="/static/images/nammqilogo.png" alt="">
+<!--            <span>NamMQI</span>-->
+        </a>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link scrollto active" th:href="@{/basic}">Bosh sahifa</a></li>
+                <li><a class="nav-link scrollto" href="#" target="_blank">Yotoqxona haqida to'liq ma'lumot</a></li>
+                <li><a class="nav-link scrollto active" href="#counts">Murojaatlar statistikasi</a></li>
+                <li><a class="nav-link scrollto active" th:href="@{logout}">Chiqish</a></li>
+                <li><a class="getstarted scrollto" href="https://nammqi.uz/">nammqi.uz</a></li>
+                <!--        <li><a class="" href="#">O'zbek tili </a></li>-->
+
+
+
+
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
+
+
+    </div>
+</header><!-- End Header -->
+<section class="breadcrumbs">
+    <div class="container">
+
+        <ol>
+            <li><a href="#">Bosh sahifa</a></li>
+            <li>Talabalar turar joyiga ariza berish</li>
+        </ol>
+        <h2>Mening shaxsiy ma'lumotlarim</h2>
+
+    </div>
+</section>
+
+<div class="row">
+    <div class="container">
+        <div class="title">[[${pageTitle}]]</div>
+        <div class="card">
+            <div th:if="${param.success}">
+                <div class="alert alert-info">Tabriklaymiz! Arizangiz muvaffaqiyatli qabul qilindi</div>
+            </div>
+        </div>
+        <div class="content">
+            <form method="post" th:action="@{/saveApp}" th:object="${app}">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">Viloyatingizni tanglang</span>
+                        <select  type="text" placeholder="Fakultetni tanlang "  th:field="*{region}" name="regiom" id="region">
+                            <option value=""></option>
+                            <option value="Andijon viloyati">Andijon viloyati</option>
+                            <option value="Farg'ona viloyati "> Farg'ona viloyati</option>
+                            <option value="Namangan viloyati ">Namangan viloyati </option>
+                            <option value="Toshkent Shahri">Toshkent Shahri</option>
+                            <option value="Toshkent viloyati">Toshkent viloyati</option>
+                            <option value="Sirdaryo viloyati">Sirdaryo viloyati</option>
+                            <option value="Qashqadaryo viloyati">Qashqadaryo viloyati</option>
+                            <option value="Jizzax viloyati">Jizzax viloyati</option>
+                            <option value="Samarqand viloyati">Samarqand viloyati</option>
+                            <option value="Navoiy viloyati">Samarqand viloyati</option>
+                            <option value="Buxoro viloyati">Buxoro viloyati</option>
+                            <option value="Xorazm viloyati">Xorazm viloyati</option>
+                            <option value="Qoraqalpog'iston">Qoraqalpog'iston</option>
+                        </select>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">Tumaningizni tanlang </span>
+                        <input name="district"   type="text" placeholder="Tumaningizni tanlang " id="district"  th:field="*{district}">
+                    </div>
+
+
+
+                        <div class="input-box">
+                            <span class="details">MFY ni tanlang</span>
+                            <input
+                                    id="village"
+                                    name="village"
+                                    placeholder="MFY ni kiriting"
+                                    th:field="*{village}"
+                                    type="text"
+                            />
+                            <!--                        <p th:errors="*{username}" class="text-danger"-->
+                            <!--                           th:if="${#fields.hasErrors('username')}">-->
+                            <!--                        </p>-->
+                        </div>
+
+
+                    <div class="input-box">
+                        <span class="details">Fakultet </span>
+                        <select  type="text" placeholder="Fakultetni tanlang "  th:field="*{faculty}" name="faculty" id="faculty">
+                            <option value=""></option>
+                            <option value="ENERGETIKA VA MEHNAT MUHOFAZASI FAKULTETI"> ENERGETIKA VA MEHNAT MUHOFAZASI FAKULTETI</option>
+                            <option value="IQTISODIYOT VA BOSHQARUV FAKULTETI"> IQTISODIYOT VA BOSHQARUV FAKULTETI</option>
+                            <option value="MASHINASOZLIK FAKULTETI"> MASHINASOZLIK FAKULTETI</option>
+                            <option value="TRANSPORT FAKULTETI">TRANSPORT FAKULTETI </option>
+                            <option value="MUHANDISLIK KOMMUNIKATSIYALARI FAKULTETI">MUHANDISLIK KOMMUNIKATSIYALARI FAKULTETI </option>
+                            <option value="SANOATNI AXBOROTLASHTIRISH FAKULTETI">SANOATNI AXBOROTLASHTIRISH FAKULTETI </option>
+                            <option value="QURILISH FAKULTETI">QURILISH FAKULTETI </option>
+                        </select>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="details">Yonalish </span>
+                        <input name="groups" type="text" placeholder="Yo'nalishingni tanglang "   th:field="*{groups}" >
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Kurs</span>
+                        <select  type="text" placeholder="Kurs "  th:field="*{status}" name="status" id="status">
+                            <option value=""></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                            </select>
+                    </div>
+
+
+                    <div class="input-box">
+                        <span class="details">Passport seria</span>
+                        <input
+                                id="passportSerialNumber"
+                                name="passportSerialNumber"
+                                placeholder="Passport seria raqamini kiriting"
+                                th:field="*{passportSerialNumber}"
+                                type="text"> </div>
+                    <div class="input-box">
+                        <span class="details">Passport rasmi(max 4mb)</span>
+                        <input name="groups" type="file" placeholder=" Passport rasmi"   >
+                    </div>
+                </div>
+                <div class="input-box">
+
+                    <a th:href="@{/user/fac}" class="btn btn-primary">Imtiyoz qo'shish</a>
+
+                </div>
+                <!--                        <p th:errors="*{password}" class="text-danger"-->
+                <!--                           th:if="${#fields.hasErrors('password')}">-->
+                <!--                        </p>-->
+                <div class="button">
+                    <input id="submit-btn" type="submit" value="Arizani yuborish">
+                    <a th:href="@{/apply}">Shaxsiy kabinetga qaytish</a>
+                </div>
+                <!--                <span>Allaqachon ro'yxatdan o'tganman? <a href="/" th:href="@{/login}">Login-->
+                <!--                             here</a></span>-->
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer id="footer" class="footer">
+
+
+    <div class="footer-top">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-lg-5 col-md-12 footer-info">
+                    <a target="_blank" href="https://buxdu.uz" class="logo d-flex align-items-center">
+                        <img src="/static/images/nammqilogo.png" alt="nammqi">
+
+                    </a>
+
+                    <div class="social-links mt-3">
+                        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+                        <a href="https://www.facebook.com/nammqi/" class="facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="https://t.me/NamMQI_rasmiy" class="telegram"><i class="bi bi-telegram "></i></a>
+                        <a href="#" class="linkedin"><i class="bi bi-linkedin bx bxl-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-6 footer-links">
+                    <h4>Onlayn ariza to'ldirish</h4>
+                    <ul>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Vakant lavozimlarga ariza berish</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Akademik ta'tilga chiqish uchun ariza berish</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Talabalar turar joyiga ariza berish</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Talabalik haqida ma'lumotnoma olish</a></li>
+                    </ul>
+                </div>
+
+
+                <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+                    <h4>Manzil</h4>
+                    <p>
+                        Namangan  shahar  <br>
+                        Islom Karimov ko`chasi 11-uy.<br><br>
+                        <strong>Tel:</strong> +998 (65) 221-27-14<br>
+                        <strong>Email:</strong> nammqi@gmil.com<br>
+                    </p>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</footer><!-- End Footer -->
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const submitButton = document.getElementById("submit-btn");
+
+        submitButton.addEventListener("click", async function (event) {
+            event.preventDefault();
+
+            // Show loading animation
+            Swal.fire({
+                title: 'Iltimos, kuting...',
+                icon: 'info',
+                allowOutsideClick: false,
+                showConfirmButton: false
+            });
+
+            // Simulate some delay to show loading animation
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            const villageInput = document.getElementById("village").value;
+
+            if (villageInput === '') {
+                Swal.fire({
+                    title: 'Iltimos, MFY ni kiriting!',
+                    icon: 'warning'
+                });
+            } else {
+                // Simulate some delay to show success animation
+                await new Promise(resolve => setTimeout(resolve, 1500));
+
+                Swal.fire({
+                    title: 'Arizangiz qabul qilindi!',
+                    text: "Kutib turing, biz tez orada siz bilan bog'lanamiz.",
+                    icon: 'success'
+                }).then((result) => {
+                    // Check if the "OK" button was clicked
+                    if (result.isConfirmed) {
+                        // Redirect to the desired page
+                        window.location.href = "/apply";
+                    }
+                });
+
+                // Submit the form (if needed)
+                // document.getElementById("your-form-id").submit();
+            }
+        });
+    });
+</script>
+
+
+<script src="/static/js/main2.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+

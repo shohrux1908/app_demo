@@ -1,11 +1,10 @@
 package uz.nammqi.app_demo.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import uz.nammqi.app_demo.payload.UserRegistrationDto;
 import uz.nammqi.app_demo.service.UserService;
 
@@ -35,5 +34,13 @@ public class UserRegistrationController {
     public String registerUserAccount(@ModelAttribute("user") UserRegistrationDto registrationDto){
         userService.save(registrationDto);
         return "redirect:/registration?success";
+    }
+
+    @GetMapping("/check-email/{email}")
+    public ResponseEntity<?> checkEmailExists(@PathVariable String email) {
+        if (userService.existsByEmail(email)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bu email allaqachon mavjud");
+        }
+        return ResponseEntity.ok().build();
     }
 }

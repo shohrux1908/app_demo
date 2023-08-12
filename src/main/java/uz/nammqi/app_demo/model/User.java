@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -22,6 +23,7 @@ public class User {
     private String email;
     private String phoneNumber;
     private String password;
+    private byte[] profileImage;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -37,12 +39,15 @@ public class User {
 
     }
 
-    public User( String firstname, String lastname, String email, String phoneNumber, String password, Collection<Role> roles) {
+    public User(String firstname, String lastname, String email, String phoneNumber, String password, Collection<Role> roles) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
+
         this.roles = roles;
     }
+
+
 }

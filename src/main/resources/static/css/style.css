@@ -5,22 +5,8 @@
   box-sizing: border-box;
   font-family: 'Poppins',sans-serif;
 }
-body{
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  background: linear-gradient(135deg, #054c7c, #2c0a3a);
-}
-.container{
-  max-width: 700px;
-  width: 100%;
-  background-color: #fff;
-  padding: 25px 30px;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-}
+
+
 .container .title{
   font-size: 25px;
   font-weight: 500;
@@ -47,7 +33,6 @@ form .user-details .input-box{
   width: calc(100% / 2 - 20px);
 }
 form .input-box span.details{
-  display: block;
   font-weight: 500;
   margin-bottom: 5px;
 }
@@ -116,7 +101,7 @@ form .input-box span.details{
    letter-spacing: 1px;
    cursor: pointer;
    transition: all 0.3s ease;
-   background: linear-gradient(135deg, #71b7e6, #380c4b);
+   background: linear-gradient(135deg, #2054c5, #380c4b);
  }
  form .button input:hover{
   /* transform: scale(0.99); */
@@ -124,11 +109,9 @@ form .input-box span.details{
   }
  @media(max-width: 584px){
  .container{
-  max-width: 100%;
 }
 form .user-details .input-box{
     margin-bottom: 15px;
-    width: 100%;
   }
   form .category{
     width: 100%;

@@ -24,4 +24,5 @@ public interface AppService {
 
     Page<Application> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
 
+    List<Application> getApplicationsByUserId(Long id);
 }

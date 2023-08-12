@@ -41,6 +41,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User save(UserRegistrationDto registrationDto) {
+        if (userRepository.existsByEmail(registrationDto.getEmail())) {
+            throw new IllegalArgumentException("Bu email allaqachon ro'yxatdan o'tgan");
+        }
         User user= new User(registrationDto.getFirstname(), registrationDto.getLastname(),
                 registrationDto.getEmail(),  registrationDto.getPhoneNumber(),  passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("ROLE_USER")));
         return userRepository.save(user);
@@ -48,7 +51,13 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        ///
+
         User user=userRepository.findByEmail(username);
         if (user==null) {
             throw new UsernameNotFoundException("Invalid username or password");

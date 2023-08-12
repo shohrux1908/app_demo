@@ -1,0 +1,159 @@
+<!-- CSS -->
+<html>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<style>
+    body {
+        background-color: #f5f5f5;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #444444;
+    }
+
+    /* add some custom styles for the user photo */
+    .user-photo {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    h2 {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 30px;
+    }
+
+    .card {
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .card-img-top {
+        border-radius: 10px 10px 0 0;
+        height: 150px;
+        object-fit: cover;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+
+    .btn-primary {
+        background-color: #380c4b;
+        border-color: #007bff;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .btn-primary:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }.bg-vilet{
+
+         background: linear-gradient(135deg, #054c7c, #380c4b);
+     }
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-vilet">
+    <a class="navbar-brand" href="#">Mening Kabinetim </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Bosh Menyu <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Profilim</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Sozlamalar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Chiqish </a>
+            </li>
+            <li class="nav-item">
+                <img class="user-photo" src="/images/user_photo.png" alt="User Photo">
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HTML -->
+<div class="container">
+    <h2 class="text-center">Mening Arizalarim</h2>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Arizangizni qoldiring:</h5>
+                        <div class="form-group">
+                            <div class="input-box">
+                                <span class="details">Shikoyatingiz mavzusini kiriting: </span><br>
+                                <input name="theme" type="text"  placeholder=" Shikoyat mavzusi kiriting:"  path="shikoyat" required />
+                                </div>
+                            <textarea class="form-control" id="complaint" rows="5" placeholder="Shikoyatingizni kiriting..."></textarea>
+                        </div>
+                        <div>
+                            <select class="form-select" aria-label="Default select example">
+                                <option value="RTTM"> Raqamli ta'lim texnologiyalar markazi </option>
+                                <option value="Sanoatni Axborotlashtirish fakulteti"> Sanoatni Axborotlashtirish fakulteti</option>
+                                <option value="ARM">Axborot resurs markazi </option>
+                            </select>
+                            <div> <br>
+                            </div>
+                        </div>
+
+                        <button id="submit-btn" class="btn btn-primary">Yuborish</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        $('#submit-btn').click(function() {
+            var complaint = $('#complaint').val();
+            if (complaint === '') {
+                Swal.fire({
+                    title: 'Iltimos Arizangizni kiriting!',
+                    icon: 'warning'
+                });
+            } else {
+                Swal.fire({
+                    title: 'Arizangiz qabul qilindi!',
+                    text: 'Kutib turing, biz tez orada siz bilan bog\'lanamiz.',
+                    icon: 'success'
+                });
+            }
+        });
+    </script>
+
+
+
+</div>
+</body>
+<!-- include the Bootstrap JavaScript library -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import uz.nammqi.app_demo.model.Application;
 import uz.nammqi.app_demo.repository.AppRepository;
+import uz.nammqi.app_demo.repository.ApplicationRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,16 @@ public class AppServiceImpl implements AppService {
 
     @Autowired
     private AppRepository appRepository;
+    private final ApplicationRepository applicationRepository;
+
+    public AppServiceImpl(ApplicationRepository applicationRepository) {
+        this.applicationRepository = applicationRepository;
+    }
+
+    @Override
+    public List<Application> getApplicationsByUserId(Long userId) {
+        return applicationRepository.findByUserId(userId);
+    }
 
     @Override
     public List<Application> getAllApps() {

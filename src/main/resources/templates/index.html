@@ -23,7 +23,7 @@
   <link href="/static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="/static/css/styleb.css" rel="stylesheet">
+  <link href="/static/css/style2.css" rel="stylesheet">
 
 
 </head>
@@ -36,44 +36,15 @@
 
     <a href="#" class="logo d-flex align-items-center">
       <img src="/static/images/nammqilogo.png" alt="">
-      <span>NamMQI</span>
+<!--      <span>NamMQI</span>-->
     </a>
 
     <nav id="navbar" class="navbar">
       <ul>
         <li><a class="nav-link scrollto active" th:href="@{/basic}">Bosh sahifa</a></li>
-        <li><a class="nav-link scrollto" href="#" target="_blank">Yotoqxona haqida to'liq ma'lumot</a></li>
-        <li><a class="nav-link scrollto active" href="#counts">Murojaatlar statistikasi</a></li>
+        <li><a class="nav-link scrollto" href="#faq" target="_blank">Yotoqxona haqida</a></li>
+        <li><a class="nav-link scrollto active" href="#analisy">Murojaatlar statistikasi</a></li>
         <li><a class="getstarted scrollto" href="https://nammqi.uz/">nammqi.uz</a></li>
-<!--        <li><a class="" href="#">O'zbek tili </a></li>-->
-        <li>
-          <div class="dropdown">
-            <br>
-<!--            <span class="badge badge-pill btn-primary ">O'z</span>-->
-            <a class="dropdown-toggle" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-              <span class="badge badge-pill btn-primary ">O'z</span>
-              <i class="flag-united-kingdom flag m-0"></i>
-            </a>
-
-
-            <ul class="dropdown-menu" aria-labelledby="Dropdown">
-              <li>
-                <a class="dropdown-item" href="#"><i class="flag-united-kingdom flag"></i>O'zbek tili <i class="fa fa-check text-success ms-2"></i></a>
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-
-              <li>
-                <a class="dropdown-item" href="#"><i class="flag-france flag"></i>English</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#"><i class="flag-russia flag"></i>Русский</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-
-
-
 
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
@@ -82,73 +53,52 @@
   </div>
 </header><!-- End Header -->
 
-
 <main id="main">
   <!-- ======= Breadcrumbs ======= -->
   <section class="breadcrumbs">
     <div class="container">
-
       <ol>
-        <li><a href="#">Bosh sahifa</a></li>
+        <li><a href="/">Bosh sahifa</a></li>
         <li>Talabalar turar joyiga ariza berish</li>
       </ol>
       <h2>Talabalar turar joyiga ariza berish</h2>
-
-<!--      <div class="d-grid gap-2 col-6 mx-auto">-->
-<!--        <a class="btn btn-success" type="button" th:href="@{/login}">Kirish</a>-->
-<!--        <a class="btn btn-primary" type="button" th:href="@{/registration}">Ro'yxatdan o'tish</a>-->
-<!--      </div>-->
+      <div style="margin-left: 1000px; margin-bottom:-10px" class="btn-group" role="group" aria-label="Basic example">
+        <a class="btn btn-success" type="button" th:href="@{/login}">Kirish</a>
+        <a class="btn btn-primary" type="button" th:href="@{/registration}">Ro'yxatdan o'tish</a>
+      </div>
     </div>
   </section>
-    <section id="counts" class="counts" style="background: aliceblue;">
+  <section  class="counts" style="background: aliceblue;">
+  <div class="text-container">
+    <div class="scrolling-text">
+      Sayt test rejimida ishlamoqda
+    </div>
+  </div>
+  <div class="slider-container">
+    <div class="slider">
+      <div class="slide"><img src="/static/images/nammqihostel2.jpg" alt="Slide 1"></div>
+      <div class="slide"><img src="/static/images/ttj.jpg" alt="Slide 2"></div>
+      <div class="slide"><img src="/static/images/ttjyangi.jpg" alt="Slide 3"></div>
+      <div class="slide"><img src="/static/images/nammqi.jpg" alt="Slide 4"></div>
+    </div>
+  </div>
+  </section>
+
+  <section  id="counts" class="counts" style="background: aliceblue;">
+
       <div class="container aos-init aos-animate" data-aos="fade-up">
-
         <header class="section-header">
-          <h2>Talabalar turar joyiga ariza berish</h2>
-          <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="/static/images/nammqihostel2.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                  <!--                    <h5>First slide label</h5>-->
-                  <!--                    <p>Some representative placeholder content for the first slide.</p>-->
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img src="/static/images/nammqihostel.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                  <!--                    <h5>Second slide label</h5>-->
-                  <!--                    <p>Some representative placeholder content for the second slide.</p>-->
-                </div>
-              </div>
-              <div class="carousel-item">
-                <img src="/static/images/nammqi.jpg" class="d-block w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block">
-                  <!--                    <h5>Third slide label</h5>-->
-                  <!--                    <p>Some representative placeholder content for the third slide.</p>-->
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-
 
           <p>Murojaatlar statistikasi</p>
         </header>
 
-        <div class="row gy-4">
+        <div class="row gy-4"  id="analisy">
 
           <div class="col-lg-4 col-md-6">
             <div class="count-box">
               <i class="bi bi-list"></i>
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="2620" data-purecounter-duration="0" class="purecounter">2620</span>
+                <span data-purecounter-start="0" data-purecounter-end="2620" data-purecounter-duration="0" class="purecounter">800</span>
                 <p>Jami o`rinlar soni</p>
               </div>
             </div>
@@ -158,7 +108,7 @@
             <div class="count-box">
               <i class="bi bi-journal-richtext" style="color: #ee6c20;"></i>
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="350" data-purecounter-duration="0" class="purecounter">350</span>
+                <span data-purecounter-start="0" data-purecounter-end="350" data-purecounter-duration="0" class="purecounter">650</span>
                 <p>Bo'sh o`rinlar soni</p>
               </div>
             </div>
@@ -168,7 +118,7 @@
             <div class="count-box">
               <i class="bi bi-headset" style="color: #15be56;"></i>
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="3424" data-purecounter-duration="0" class="purecounter">3424</span>
+                <span data-purecounter-start="0" data-purecounter-end="3424" data-purecounter-duration="0" class="purecounter">150</span>
                 <p>Tushgan arizalar</p>
               </div>
             </div>
@@ -182,7 +132,7 @@
             <div class="count-box">
               <i class="bi bi-people" style="color: #a8052f;"></i>
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="200" data-purecounter-duration="0" class="purecounter">200</span>
+                <span data-purecounter-start="0" data-purecounter-end="200" data-purecounter-duration="0" class="purecounter">50</span>
                 <p>Rad etilgan arizalar</p>
               </div>
             </div>
@@ -192,7 +142,7 @@
             <div class="count-box">
               <i class="bi bi-chevron-right" style="color: #bb0852;"></i>
               <div>
-                <span data-purecounter-start="0" data-purecounter-end="2753" data-purecounter-duration="0" class="purecounter">2753</span>
+                <span data-purecounter-start="0" data-purecounter-end="2753" data-purecounter-duration="0" class="purecounter">100</span>
                 <p>Qabul qilingan arizalar</p>
               </div>
             </div>
@@ -201,7 +151,7 @@
         <br>
         <div class="row gy-4">
           <div class="read-more text-center">
-            <a class="btn btn-primary" href="/apply" target="_blank">Shaxsiy Sahifa o'tish<i class="bi bi-chevron-right"></i></a>
+            <a class="btn btn-primary" type="button" th:href="@{/login}">Ariza yuborish</a>
           </div>
         </div>
 
@@ -209,8 +159,8 @@
       </div>
     </section><!-- End Counts Section -->
 
-  <section id="faq" class="faq">
 
+    <section  class="faq" style="background: aliceblue;">
     <div class="container aos-init aos-animate" data-aos="fade-up">
 
       <header class="section-header">
@@ -272,7 +222,7 @@
                   </h2>
                   <div id="faq2-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist2">
                     <div class="accordion-body">
-                      Namangan Muhandislik-Qurilish institutida 5 ta talabalar turar joyi binolari mavjud bo‘lib, ularda jami 2048 ta o‘rin talabalar yashashi uchun mo‘ljallangan. 1-6- binolar sig‘imi 275 o‘rindan bo‘lib, jami 1650 o‘rindan, 7-bino sig‘imi 398 o‘rindan iborat. Xorijiy talabalar uchun alohida har bir binoda 3 o‘rinli xona ajratilgan. Xorijiy talabalar uchun xonalar qo'shimcha qulayliklar bilan jihozlangan. Talabalar xavfsizligi uchun 24 soatlik video nazorati va qarovular tashkil qilingan.
+                      Namangan Muhandislik-Qurilish institutida 2 ta talabalar turar joyi binolari mavjud bo‘lib, ularda jami 800 ta o‘rin talabalar yashashi uchun mo‘ljallangan.Shuningdek yana 1000 o'ringa mo'ljallangan Bino qurilish ishlari olib borilmoqda 1- asosiy binosi sig‘imi 600 o‘rindan bo‘lib,2- binosi 200 o'rindan ibora va  jami 800 o‘rin mavjuda, . Xorijiy talabalar uchun alohida har bir binoda 3 o‘rinli xona ajratilgan. Xorijiy talabalar uchun xonalar qo'shimcha qulayliklar bilan jihozlangan. Talabalar xavfsizligi uchun 24 soatlik video nazorati va qarovular tashkil qilingan.
                     </div>
                   </div>
                 </div>
@@ -303,7 +253,7 @@
         <div class="col-lg-5 col-md-12 footer-info">
           <a target="_blank" href="https://buxdu.uz" class="logo d-flex align-items-center">
             <img src="/static/images/nammqilogo.png" alt="nammqi">
-            <span>NamMQI</span>
+<!--            <span>NamMQI</span>-->
           </a>
 
           <div class="social-links mt-3">
@@ -342,7 +292,9 @@
 
 </footer><!-- End Footer -->
 
+<script>
 
+</script>
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>.
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

@@ -28,7 +28,11 @@
 <!--                        <div class="text-success">Tabriklaymiz! Siz Tizimga Muvaffaqiyatli Ro'yxatdan o'tdingiz</div>-->
                        <h2> <p class="text-success">Tabriklaymiz! Siz Tizimga Muvaffaqiyatli Ro'yxatdan o'tdingiz</p> </h2>
                     </div>
-                    <form th:action="@{/registration}" method="post" th:object="${user}">
+                    <div th:if="${param.error}">
+                        <!--                        <div class="text-success">Tabriklaymiz! Siz Tizimga Muvaffaqiyatli Ro'yxatdan o'tdingiz</div>-->
+                        <h2> <p class="text-success">Username allaqachon bor</p> </h2>
+                    </div>
+                    <form th:action="@{/registration}" th:method="post" th:object="${user}" id="userRegistrationForm" enctype="multipart/form-data">
                         <div class="form-group">
                             <label ><i class="zmdi zmdi-account material-icons-name"></i></label>
                             <input type="text" name="firstname"  th:field="*{firstname}"  placeholder="Ismingiz"/>
@@ -39,16 +43,18 @@
                         </div>
                         <div class="form-group">
                             <label><i class="zmdi zmdi-email"></i></label>
-                            <input type="text" name="email" th:field="*{email}"  placeholder="Login ni kiriting "/>
+                            <input type="text" name="phoneNumber" th:field="*{phoneNumber}"  placeholder="Tefon raqamingiz kiriting "/>
                         </div>
                         <div class="form-group">
                             <label><i class="zmdi zmdi-email"></i></label>
-                            <input type="text" name="phoneNumber" th:field="*{phoneNumber}"  placeholder="Tefon raqamingiz kiriting "/>
+                            <input type="text" th:field="*{email}" id="email" name="email" required onblur="checkUsername()">
+                            <span id="usernameExistsMessage" style="display: none; color: red;">Bu Login allaqachon mavjud</span>
                         </div>
                         <div class="form-group">
                             <label><i class="zmdi zmdi-lock"></i></label>
                             <input type="password" name="password"  th:field="*{password}"  id="pass" placeholder="Password"/>
                         </div>
+
                         <div class="form-group">
                             <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
                             <label for="agree-term" class="label-agree-term"><span><span></span></span>Men barcha bayonotlarga qo'shilaman  <a href="#" class="term-service">Xizmat ko'rsatish shartlari</a></label>
@@ -61,11 +67,30 @@
                 <div class="signup-image">
                     <figure><img src="/static/images/signup-image.jpg" alt="sing up image"></figure>
                     <a th:href="@{/login}" class="signup-image-link">Men allaqachon ro'yxatdan o'tganman</a>
+                    <a  th:href="@{/}" class="signup-image-link">Bosh Sahifaga qaytish</a>
                 </div>
             </div>
         </div>
     </section>
 </div>
+
+<script>
+    function checkUsername() {
+        const email = document.getElementById('email').value;
+        fetch('/api/check-email/' + email)
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('usernameExistsMessage').style.display = 'none';
+                } else {
+                    document.getElementById('usernameExistsMessage').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+</script>
+
 
 <script src="/static/vendor/jquery/jquery.min.js"></script>
 <script src="/static/js/main.js"></script>
@@ -73,119 +98,3 @@
 </html>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns="http://www.w3.org/1999/html">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Registration</title>-->
-
-<!--    &lt;!&ndash; Latest compiled and minified CSS &ndash;&gt;-->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
-
-<!--    &lt;!&ndash; Optional theme &ndash;&gt;-->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
-
-<!--    &lt;!&ndash; Latest compiled and minified JavaScript &ndash;&gt;-->
-<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
-<!--    <style>-->
-<!--        p {-->
-<!--            background-image: url('https://nammqi.uz/storage/news/2022-10-08-000601.jpg');-->
-<!--        }-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--&lt;!&ndash;<img src="https://nammqi.uz/storage/news/2022-10-08-000601.jpg" height="1000" width="1000">&ndash;&gt;-->
-<!--&lt;!&ndash;<p style="background-image: url('https://nammqi.uz/storage/news/2022-10-08-000601.jpg');">&ndash;&gt;-->
-<!--     <nav class="navbar navbar-inverse navbar-fixed-top">-->
-<!--         <div class="container">-->
-<!--             <div class="navbar-header">-->
-<!--                 <button type="button" class="navbar-toggle collapsed"-->
-<!--                         data-toggle="collapse" data-target="#navbar" aria-expanded="false"-->
-<!--                         aria-controls="navbar">-->
-<!--                     <span class="sr-only">Toggle navigation</span> <span-->
-<!--                     class="icon-bar"></span> <span class="icon-bar"></span><span-->
-<!--                     class="icon-bar"></span>-->
-<!--                 </button>-->
-<!--                 <a class="navbar-brand" href="#" th:href="@{/}">Registration and-->
-<!--                           Login Module</a>-->
-<!--             </div>-->
-<!--         </div>-->
-<!--     </nav>-->
-
-<!--     <br>-->
-<!--     <br>-->
-<!--     <div class="container">-->
-<!--         <div class="row">-->
-<!--             <div class="col-md-6 col-md-offset-3">-->
-
-<!--                 <div th:if="${param.success}">-->
-<!--                     <div class="alert alert-info">You're successfully registered-->
-<!--                         to our awesome app!</div>-->
-<!--                 </div>-->
-
-<!--                 <h1>Registration</h1>-->
-
-<!--                 <form th:action="@{/registration}" method="post" th:object="${user}">-->
-<!--                     <div class="form-group">-->
-<!--                         <label class="control-label" for="firstname">-->
-<!--                             First Name-->
-<!--                         </label>-->
-<!--                         <input id="firstname" class="form-control" th:field="*{firstname}"  name="firstname"-->
-<!--                                 required autofocus="autofocus"/>-->
-<!--                     </div>-->
-
-<!--                     <div class="form-group">-->
-<!--                         <label class="control-label" for="lastname">-->
-<!--                             Last Name-->
-<!--                         </label>-->
-<!--                         <input id="lastname" class="form-control" th:field="*{lastname}"  name="lastname"-->
-<!--                                required autofocus="autofocus"/>-->
-<!--                     </div>-->
-
-<!--                     <div class="form-group">-->
-<!--                         <label class="control-label" for="email">-->
-<!--                             Email-->
-<!--                         </label>-->
-<!--                         <input id="email" class="form-control" th:field="*{email}"  name="email"-->
-<!--                                required autofocus="autofocus"/>-->
-<!--                     </div>-->
-
-<!--                     <div class="form-group">-->
-<!--                         <label class="control-label" for="password">-->
-<!--                             Password-->
-<!--                         </label>-->
-<!--                         <input id="password" class="form-control" type="password" th:field="*{password}"  name="password"-->
-<!--                                required autofocus="autofocus"/>-->
-<!--                     </div>-->
-
-<!--                     <div class="form-group">-->
-<!--                         <button type="submit" class="btn btn-success">Register</button>-->
-<!--                         <span>Already registered? <a href="/" th:href="@{/login}">Login here</a> </span>-->
-<!--                     </div>-->
-<!--                 </form>-->
-
-
-
-
-<!--             </div>-->
-<!--         </div>-->
-<!--     </div>-->
-
-<!--&lt;!&ndash;</p>&ndash;&gt;-->
-<!--</body>-->
-<!--</html>-->

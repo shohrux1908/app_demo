@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import uz.nammqi.app_demo.service.UserService;
 
 @Configuration
@@ -33,6 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.setPasswordEncoder(passwordEncoder());
         return auth;
     }
+//    @Bean
+//    public CommonsMultipartResolver multipartResolver() {
+//        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+//        // Max upload size in bytes (10 MB)
+//        multipartResolver.setMaxUploadSize(10 * 1024 * 1024);
+//        return multipartResolver;
+//    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -41,11 +49,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers(
-                "/registration**",
-                "/js/**",
-                "/css/**",
-                "/images/**","/static/**").permitAll()
+        http.authorizeRequests()
+                .antMatchers(
+                        "/registration**",
+                        "/js/**",
+                        "/css/**",
+                        "/static/ImgUpload/**",
+                        "/images/**",
+                        "/static/**",
+                        "/imageUpload", // Yuklash sahifasiga ruxsat berish
+                        "/**")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -59,6 +73,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login?logout")
                 .permitAll();
     }
-
 
 }

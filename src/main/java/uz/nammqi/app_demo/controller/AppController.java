@@ -2,6 +2,7 @@ package uz.nammqi.app_demo.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,17 +11,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import uz.nammqi.app_demo.model.Application;
-import uz.nammqi.app_demo.model.CombinedData;
-import uz.nammqi.app_demo.model.User;
-import uz.nammqi.app_demo.model.UsersApps;
+import org.springframework.web.multipart.MultipartFile;
+import uz.nammqi.app_demo.model.*;
 import uz.nammqi.app_demo.payload.ApplicationDto;
 import uz.nammqi.app_demo.payload.UserRegistrationDto;
+import uz.nammqi.app_demo.repository.ImageRepository;
 import uz.nammqi.app_demo.repository.UserRepository;
 import uz.nammqi.app_demo.repository.UsersAppsRepository;
 import uz.nammqi.app_demo.service.AppService;
 import uz.nammqi.app_demo.service.UserServiceImpl;
 
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -38,11 +44,14 @@ public class AppController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    ImageRepository imageRepository;
+
 
 
     @GetMapping("/apps")
     public String viewHomePage(Model model){
-        return findPaginated(1,"faculty","asc",model);
+        return findPaginated(2,"faculty","asc",model);
     }
 
 
@@ -64,7 +73,7 @@ public class AppController {
     public String showNewEmployeeForm(Model model){
         Application application=new Application();
         model.addAttribute("app",application);
-        return "new_app";
+        return "usersApplies";
     }
 
 
@@ -104,21 +113,26 @@ public class AppController {
     }
 
 //=====================================changing
-    @GetMapping("/showUserApp")
-    public String showUserApp( Model model, Application applications){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
-        String username = ((UserDetails) principal).getUsername();
-        User user = userRepository.findByEmail(username);
+@GetMapping("/showUserApp")
+public String showUserApp(Model model) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    Object principal = authentication.getPrincipal();
+    String username = ((UserDetails) principal).getUsername();
+    User user = userRepository.findByEmail(username);
 
-        Application application=appService.getApplicationByUserId(user.getId());
-        if(application==null)
-            return "empty";
-        List<Application> all = List.of(application);
-        model.addAttribute("userApp",all);
-        return "user_app";
+    List<Application> userApplications = appService.getApplicationsByUserId(user.getId());
 
+    if (userApplications.isEmpty()) {
+        // Foydalanuvchi uchun aplikatsiya mavjud emas, ma'lumotlar bazasida o'rnini tekshirib chiqing
+        model.addAttribute("noApplications", true);
+    } else {
+        model.addAttribute("userApp", userApplications);
     }
+
+    return "user_app";
+}
+
+
 
     @GetMapping("/user/info")
     public String userInfo( Model model){
@@ -185,18 +199,54 @@ public class AppController {
         return "redirect:/apps";
     }
 
-    @GetMapping("/charts")
-    public String charts(){
-        return "charts";
-    }
-    @GetMapping("/cards")
-    public String cards(){
-        return "cards";
+    @GetMapping("/user/fac")
+    public String userFic( Model model){
+        Authentication authentication1 = SecurityContextHolder.getContext().getAuthentication();
+        Object principal1 = authentication1.getPrincipal();
+        String username = ((UserDetails) principal1).getUsername();
+        User user = userRepository.findByEmail(username);
+
+        if(user==null)
+            return "example";
+
+        Long uId = user.getId();
+         List<Images>list = imageRepository.findAll();
+         model.addAttribute("list",list);
+
+//        User user = userService.get(id);
+        return "facility";
     }
 
-    @GetMapping("/buttons")
-    public String button(){
-        return "buttons";
+    //imageUpload
+
+    @PostMapping("/imageUpload")
+    public String imageUpload(@RequestParam("img") MultipartFile img, HttpSession session) {
+        try {
+            Images images = new Images();
+            images.setImageName(img.getOriginalFilename());
+             images.setFacility(images.getFacility()); // This line seems redundant
+
+            Images uploadImg = imageRepository.save(images);
+
+            if (uploadImg != null) {
+                File saveDirectory = new File("static/ImgUpload");
+                if (!saveDirectory.exists()) {
+                    saveDirectory.mkdirs();
+                }
+
+                Path path = Paths.get(saveDirectory.getAbsolutePath() + File.separator + img.getOriginalFilename());
+                Files.copy(img.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+
+                session.setAttribute("msg", "Imtiyoz muvaffaqiyatli yuklandi");
+            } else {
+                session.setAttribute("msg", "Imtiyoz yuklashda xatolik yuz berdi");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.setAttribute("msg", "Xatolik yuz berdi: " + e.getMessage());
+        }
+
+        return "facility";
     }
 
     @GetMapping("/users/table")

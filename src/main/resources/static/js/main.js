@@ -1,4 +1,13 @@
 
+function convertImageToBase64(file, callback) {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+        const base64String = event.target.result.split(',')[1];
+        callback(base64String);
+    };
+    reader.readAsDataURL(file);
+}
+
 (function ($) {
     "use strict";
 

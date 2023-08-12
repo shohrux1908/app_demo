@@ -41,11 +41,14 @@ public class DataLoader implements CommandLineRunner {
 //            Role admin=roleRepository.save(new Role("ROLE_ADMIN"));
 
             userRepository.save(new User(
-                    "Admin",
-                    "Admin",
+                    1L,
+                    "static/admin",
+                    "static/admin",
                     "admin",
                     "",
                     passwordEncoder.encode( "890"),
+                    "1".getBytes(),
+
                     List.of(new Role("ROLE_ADMIN"))
 
 
