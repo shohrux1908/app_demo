@@ -16,4 +16,6 @@ public interface UserService extends UserDetailsService {
 
     List<UserRegistrationDto> findAllUsers();
     List<ApplicationDto> findAllApplication();
+    boolean checkIfEmailExists(String email);
+    void save(User user);
 }

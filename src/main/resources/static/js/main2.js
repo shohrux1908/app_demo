@@ -307,3 +307,41 @@ function updateSliderPosition() {
 }
 
 setInterval(slideNext, 3000);
+
+// Drop-down menyusining ochilish yopilish harakatlari
+document.addEventListener("DOMContentLoaded", function () {
+    const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
+
+    dropdownToggles.forEach((toggle) => {
+        toggle.addEventListener("click", function (event) {
+            event.preventDefault();
+            const dropdownMenu = this.nextElementSibling;
+            dropdownMenu.classList.toggle("show");
+        });
+    });
+
+    // Menyu yopilganda boshqa joyga bosganda yopilsin
+    window.addEventListener("click", function (event) {
+        if (!event.target.matches(".dropdown-toggle")) {
+            const dropdownMenus = document.querySelectorAll(".dropdown-menu");
+            dropdownMenus.forEach((menu) => {
+                if (menu.classList.contains("show")) {
+                    menu.classList.remove("show");
+                }
+            });
+        }
+    });
+});
+// O'tish tugmasi bosilganda animatsiya qo'shish
+document.addEventListener("DOMContentLoaded", function() {
+    const buttons = document.querySelectorAll(".btn-primary");
+
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            button.classList.add("btn-clicked");
+            setTimeout(() => {
+                button.classList.remove("btn-clicked");
+            }, 300);
+        });
+    });
+});

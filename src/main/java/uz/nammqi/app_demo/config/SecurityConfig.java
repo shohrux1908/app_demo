@@ -57,9 +57,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/static/ImgUpload/**",
                         "/images/**",
                         "/static/**",
-                        "/imageUpload", // Yuklash sahifasiga ruxsat berish
+                        "/imageUpload",
                         "/**")
                 .permitAll()
+                .antMatchers("/error").permitAll() // Xato sahifasiga ruxsat berish
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

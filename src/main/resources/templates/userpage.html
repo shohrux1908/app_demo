@@ -2,7 +2,8 @@
 <!-- CSS -->
 <html>
 
-
+<title>Talabalar turar joyi murojaatlari</title>
+<link href="/static/images/logo.png" rel="icon">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link href="/static/css/style2.css" rel="stylesheet">
 
@@ -81,7 +82,7 @@
 <!-- HTML -->
 <div class="container">
     <br>
-    <h2 style="margin-right: 40%">Mening Amallarim </h2>
+    <h3>Mening Amallarim </h3>
     <div class="row d-flex justify-content-around">
         <div class="col-md-4">
             <div class="card">
@@ -90,7 +91,7 @@
 
                 <div class="card-body">
                     <h5 class="card-text">Mening ma'lumotlarim</h5>
-                    <p class="card-title">O'zingiz haqidagi ma'lumotlarni bilishingiz mumkin </p>
+                    <p class="card-title">O'zingiz haqidagi shaxsiy ma'lumotlarni bilishingiz mumkin </p>
                     <form method="post" ></form>
 <!--                    <a href="/userinfo" class="btn btn-primary"> O'tish </a>-->
                     <a th:href="@{/user/info/}" class="btn btn-primary"> O'tish </a>
@@ -103,7 +104,7 @@
                 <img class="card-img-top" src="/static/images/userinfo.jpg" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-text">Ariza yuborish</h5>
-                    <p class="card-title">O'zingizni qiynayotgan muammolaringiz shikoyat tarziga yuborishingiz mumkin</p>
+                    <p class="card-title">Talablar turar jo'yidan online ariza topshirishingiz mumkin</p>
                     <a th:href="@{showNewAppForm}" class="btn btn-primary">O'tish</a>
                 </div>
             </div>
@@ -113,21 +114,11 @@
                 <img class="card-img-top" src="/static/images/Jan42.jpg" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-text">Ariza holati  </h5>
-                    <p class="card-title"> Sizning shu davrgacha bo'lgan muvaffaqiyatli jarayonlaringiz</p>
+                    <p class="card-title"> Shu davrgacha bo'lgan arizangiz holatini ko'rishingiz mumkin</p>
                     <a th:href="@{showUserApp}" class="btn btn-primary">O'tish</a>
                 </div>
             </div>
         </div>
-<!--        <div class="col-md-4">-->
-<!--            <div class="card">-->
-<!--                <img class="card-img-top" src="/static/images/message.jpg" alt="Card image cap">-->
-<!--                <div class="card-body">-->
-<!--                    <h5 class="card-title">Xabarlar </h5>-->
-<!--                    <p class="card-text"> Sizning shu davrgacha bo'lgan muvaffaqiyatli jarayonlaringiz</p>-->
-<!--                    <a th:href="@{/messages/{id}(id=${session.userId})}" class="btn btn-primary">O'tish</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
 
 
     </div>

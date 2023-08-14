@@ -728,36 +728,31 @@
                                                 <tr>
                                                     <th>
                                                         <a th:href="@{'/page/'+${currentPage}+'?sortField=faculty&sortDir=' + ${reverseSortDir}}">
-                                                            Fakultet
+                                                            Fakultet va Guruhi
                                                         </a>
                                                     </th>
                                                     <th>
                                                         <a th:href="@{'/page/'+${currentPage}+'?sortField=groups&sortDir=' + ${reverseSortDir}}">
-                                                            Guruh
+                                                            Yonalishi
                                                         </a>
                                                     </th>
                                                     <th>
                                                         <a th:href="@{'/page/'+${currentPage}+'?sortField=district&sortDir=' + ${reverseSortDir}}">
-                                                            Viloyat
+                                                            Manzil
                                                         </a>
                                                     </th>
-                                                    <th>Tuman</th>
-                                                    <th>MFY</th>
                                                     <th>Yotoqxona raqami</th>
                                                     <th>Yotoqxona qavati</th>
                                                     <th>Xona raqami</th>
-                                                    <th>Passport serial raqami</th>
+                                                    <th>Kursi</th>
                                                     <th>Javob</th>
                                                     <th colspan="3" >Actions</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 <tr th:each="app:${listApplications}">
-                                                    <td th:text="${app.faculty}"></td>
-                                                    <td th:text="${app.groups}"></td>
-                                                    <td th:text="${app.region}"></td>
-                                                    <td th:text="${app.district}"></td>
-                                                    <td th:text="${app.village}"></td>
+                                                    <td th:text="${app.faculty}+${app.groups}"></td>
+                                                    <td th:text="${app.region + ' ' + app.district + ' ' + app.village}"></td>
                                                     <td th:text="${app.bedroomNumber}"></td>
                                                     <td th:text="${app.bedroomFloor}"></td>
                                                     <td th:text="${app.roomNumber}"></td>

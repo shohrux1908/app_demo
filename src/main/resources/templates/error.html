@@ -1,22 +1,32 @@
 
-<html>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link href="/static/css/style2.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/static/css/style.css"> <!-- CSS faylni chaqirish -->
+<html>
 <title>Talabalar turar joyi murojaatlari</title>
 <link href="/static/images/logo.png" rel="icon">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link href="/static/css/style2.css" rel="stylesheet">
+<style>.error-container {
+  text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #e74c3c;
+}
 
 
+</style>
 
 <body>
-
 <header id="header" class="header fixed-top">
   <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
     <a href="#" class="logo d-flex align-items-center">
       <img src="/static/images/nammqilogo.png" alt="">
-      <!--            <span>NamMQI</span>-->
+
     </a>
 
     <nav id="navbar" class="navbar">
@@ -26,10 +36,6 @@
         <li><a class="nav-link scrollto active" href="#counts">Murojaatlar statistikasi</a></li>
         <li><a class="nav-link scrollto active" th:href="@{logout}">Chiqish</a></li>
         <li><a class="getstarted scrollto" href="https://nammqi.uz/">nammqi.uz</a></li>
-        <!--        <li><a class="" href="#">O'zbek tili </a></li>-->
-
-
-
 
       </ul>
       <i class="bi bi-list mobile-nav-toggle"></i>
@@ -45,51 +51,15 @@
       <li><a href="#">Bosh sahifa</a></li>
       <li>Talabalar turar joyiga ariza berish</li>
     </ol>
-    <h2>Imtiyoz yuklash sahifasi</h2>
+
+
 
   </div>
 </section>
-
-<div class="row">
-  <div class="container">
-
-    <div class="card">
-      <div th:if="${session.msg}">
-        <p class="alert alert-info">[[${session.msg}]]</p>
-        <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
-      </div>
-    </div>
-    <div class="content">
-
-      <form method="post" th:action="@{/imageUpload}" enctype="multipart/form-data">
-        <div class="user-details">
-          <div class="input-box">
-            <span class="details">Imtiyoz turi</span>
-            <select  type="text"  name="facility"  required>
-              <option value="">Imtiyoz kiriting</option>
-              <option value="Chin yetim (Mehribonlik uyi tarbiyalanuvchisi">Chin yetim (Mehribonlik uyi tarbiyalanuvchisi)</option>
-              <option value="Nogironlik(1-2-guruh)">Nogironlik(1-2-guruh)</option>
-              <option value="Ayollar daftari">Ayollar daftari</option>
-              <option value="Yoshlar daftari">Yoshlar daftari</option>
-              <option value="Temir daftar">Temir daftar</option>
-            </select>
-          </div>
-
-          <div class="input-box">
-            <span class="details">Imtiyoz rasmini yuklang (max 2mb)</span>
-            <input name="img"   type="file" placeholder="img" id="img" >
-          </div>
-        </div>
-        <div class="button">
-          <input id="submit-btn" type="submit" value="Arizani yuborish">
-          <a th:href="@{/apply}" class="return-link">Shaxsiy kabinetga qaytish</a>
-          <a th:href="@{/showNewAppForm}" class="return-link">Ariza yuborish qaytish</a>
-        </div>
-        <!--                <span>Allaqachon ro'yxatdan o'tganman? <a href="/" th:href="@{/login}">Login-->
-        <!--                             here</a></span>-->
-      </form>
-    </div>
-  </div>
+<div class="error-container">
+  <h1>Oops! Xato sodir bo'ldi.</h1>
+  <p>Uzr so'raymiz, sahifani topib bo'lmadi.</p>
+  <a style="color: #0a53be" th:href="@{/}">Bosh sahifaga qaytish</a>
 </div>
 
 
@@ -100,7 +70,7 @@
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-info">
-          <a target="_blank" href="https://buxdu.uz" class="logo d-flex align-items-center">
+          <a target="_blank" href="https://nammqi.uz" class="logo d-flex align-items-center">
             <img src="/static/images/nammqilogo.png" alt="nammqi">
 
           </a>
@@ -140,14 +110,9 @@
   </div>
 
 </footer><!-- End Footer -->
-
-
 </body>
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="/static/js/main2.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>

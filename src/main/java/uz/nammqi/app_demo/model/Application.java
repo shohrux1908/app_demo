@@ -36,6 +36,8 @@ public class Application {
 
     private String roomNumber;
 
+    private String level;
+
     @Column(nullable = false)
     private String passportSerialNumber;
 
@@ -44,9 +46,7 @@ public class Application {
 
     private Long userId;
 
-    public Application(Long id, String faculty, String groups, String region, String district,
-                       String village, String bedroomNumber, String bedroomFloor,
-                       String roomNumber, String passportSerialNumber, String status, Long userId) {
+    public Application(Long id, String faculty, String groups, String region, String district, String village, String bedroomNumber, String bedroomFloor, String roomNumber, String level, String passportSerialNumber, String status, Long userId) {
         this.id = id;
         this.faculty = faculty;
         this.groups = groups;
@@ -56,9 +56,9 @@ public class Application {
         this.bedroomNumber = bedroomNumber;
         this.bedroomFloor = bedroomFloor;
         this.roomNumber = roomNumber;
+        this.level = level;
         this.passportSerialNumber = passportSerialNumber;
         this.status = status;
         this.userId = userId;
     }
-
 }

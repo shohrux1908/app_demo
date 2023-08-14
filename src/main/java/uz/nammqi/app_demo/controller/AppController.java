@@ -4,6 +4,8 @@ package uz.nammqi.app_demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import uz.nammqi.app_demo.model.*;
 import uz.nammqi.app_demo.payload.ApplicationDto;
 import uz.nammqi.app_demo.payload.UserRegistrationDto;
@@ -56,18 +59,24 @@ public class AppController {
 
 
     @PostMapping("/saveApp")
-    public String saveApplication(@ModelAttribute("app") Application application){
+    public String saveApplication(@ModelAttribute("app") Application application, RedirectAttributes redirectAttributes){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();
         String username = ((UserDetails) principal).getUsername();
         User user = userServiceImpl.getUser(username);
         application.setUserId(user.getId());
         appService.saveApps(application);
-        if (Objects.equals(user.getEmail(), "admin"))
-            return "redirect:/apps";
 
-        return "redirect:/apply";
+        // Check if the user's email is "admin"
+        if (Objects.equals(user.getEmail(), "admin")) {
+            redirectAttributes.addAttribute("success", "true");
+            return "redirect:/apps";
+        }
+
+        redirectAttributes.addAttribute("success", "true");
+        return "redirect:/showNewAppForm";
     }
+
 
     @GetMapping("/showNewAppForm")
     public String showNewEmployeeForm(Model model){
@@ -220,11 +229,11 @@ public String showUserApp(Model model) {
     //imageUpload
 
     @PostMapping("/imageUpload")
-    public String imageUpload(@RequestParam("img") MultipartFile img, HttpSession session) {
+    public String imageUpload(@RequestParam("img") MultipartFile img, @RequestParam("facility") String facility, HttpSession session, Model model) {
         try {
             Images images = new Images();
             images.setImageName(img.getOriginalFilename());
-             images.setFacility(images.getFacility()); // This line seems redundant
+            images.setFacility(facility); // Set the provided facility value
 
             Images uploadImg = imageRepository.save(images);
 
@@ -246,8 +255,9 @@ public String showUserApp(Model model) {
             session.setAttribute("msg", "Xatolik yuz berdi: " + e.getMessage());
         }
 
-        return "facility";
+        return "facility"; // Change this to your appropriate view name
     }
+
 
     @GetMapping("/users/table")
     public String showUser( Model model){
@@ -271,4 +281,25 @@ public String showUserApp(Model model) {
         model.addAttribute("combinedDataList", combinedDataList);
         return "tables";
     }
+
+    //check email
+    @GetMapping("/check-email/{email}")
+    public ResponseEntity<String> checkEmail(@PathVariable String email) {
+        boolean emailExistsInDatabase = checkIfEmailExistsInDatabase(email);
+
+        if (emailExistsInDatabase) {
+            return new ResponseEntity<>("Email mavjud", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Email mavjud emas", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    private boolean checkIfEmailExistsInDatabase(String email) {
+        // Bu joyda ma'lumotlar bazasiga ulanishni tekshiruvchi kod bo'lishi kerak
+        // Misol uchun, sizning ma'lumotlar bazangizga tegishli so'rovni yuborishingiz mumkin
+        // Va bazadan natija olishingiz mumkin, agar email manzili mavjud bo'lsa
+        // Ushbu funksiyani tegishli tarzda implement qilishingiz lozim
+        return false; // Sizning ma'lumotlar bazangizga qarab javobni belgilang
+    }
+
 }

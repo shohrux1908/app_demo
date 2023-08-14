@@ -23,7 +23,7 @@ public class User {
     private String email;
     private String phoneNumber;
     private String password;
-    private byte[] profileImage;
+
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(

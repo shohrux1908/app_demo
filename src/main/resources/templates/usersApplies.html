@@ -3,7 +3,8 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link href="/static/css/style2.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/static/css/style.css"> <!-- CSS faylni chaqirish -->
+<link rel="stylesheet" type="text/css" href="/static/css/style.css"> <!-- CSS faylni chaqirish -->  <title>Talabalar turar joyi murojaatlari</title>
+<link href="/static/images/logo.png" rel="icon">
 
 
 
@@ -43,7 +44,7 @@
             <li><a href="#">Bosh sahifa</a></li>
             <li>Talabalar turar joyiga ariza berish</li>
         </ol>
-        <h2>Mening shaxsiy ma'lumotlarim</h2>
+        <h2>Ariza yuborish formasi</h2>
 
     </div>
 </section>
@@ -52,16 +53,14 @@
     <div class="container">
         <div class="title">[[${pageTitle}]]</div>
         <div class="card">
-            <div th:if="${param.success}">
-                <div class="alert alert-info">Tabriklaymiz! Arizangiz muvaffaqiyatli qabul qilindi</div>
-            </div>
+
         </div>
         <div class="content">
             <form method="post" th:action="@{/saveApp}" th:object="${app}">
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details">Viloyatingizni tanglang</span>
-                        <select  type="text" placeholder="Fakultetni tanlang "  th:field="*{region}" name="regiom" id="region">
+                        <select  type="text" placeholder="Fakultetni tanlang "  th:field="*{region}" name="region" id="region">
                             <option value=""></option>
                             <option value="Andijon viloyati">Andijon viloyati</option>
                             <option value="Farg'ona viloyati "> Farg'ona viloyati</option>
@@ -121,7 +120,7 @@
                     </div>
                     <div class="input-box">
                         <span class="details">Kurs</span>
-                        <select  type="text" placeholder="Kurs "  th:field="*{status}" name="status" id="status">
+                        <select  type="text" placeholder="Kurs "  th:field="*{level}" name="status" id="status">
                             <option value=""></option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -154,10 +153,10 @@
                 <!--                        </p>-->
                 <div class="button">
                     <input id="submit-btn" type="submit" value="Arizani yuborish">
-                    <a th:href="@{/apply}">Shaxsiy kabinetga qaytish</a>
+
+                    <a th:href="@{/apply}" class="return-link">Shaxsiy kabinetga qaytish</a>
+
                 </div>
-                <!--                <span>Allaqachon ro'yxatdan o'tganman? <a href="/" th:href="@{/login}">Login-->
-                <!--                             here</a></span>-->
             </form>
         </div>
     </div>
@@ -213,54 +212,21 @@
 
 
 </body>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
+
     document.addEventListener("DOMContentLoaded", function () {
-        const submitButton = document.getElementById("submit-btn");
+        const queryParams = new URLSearchParams(window.location.search);
+        if (queryParams.get("success")) {
+            const alertElement = document.createElement("div");
+            alertElement.classList.add("alert", "alert-info");
+            alertElement.textContent = "Tabriklaymiz! Arizangiz muvaffaqiyatli qabul qilindi. Tez orada siz bilan bog'lanamiz!";
 
-        submitButton.addEventListener("click", async function (event) {
-            event.preventDefault();
-
-            // Show loading animation
-            Swal.fire({
-                title: 'Iltimos, kuting...',
-                icon: 'info',
-                allowOutsideClick: false,
-                showConfirmButton: false
-            });
-
-            // Simulate some delay to show loading animation
-            await new Promise(resolve => setTimeout(resolve, 1500));
-
-            const villageInput = document.getElementById("village").value;
-
-            if (villageInput === '') {
-                Swal.fire({
-                    title: 'Iltimos, MFY ni kiriting!',
-                    icon: 'warning'
-                });
-            } else {
-                // Simulate some delay to show success animation
-                await new Promise(resolve => setTimeout(resolve, 1500));
-
-                Swal.fire({
-                    title: 'Arizangiz qabul qilindi!',
-                    text: "Kutib turing, biz tez orada siz bilan bog'lanamiz.",
-                    icon: 'success'
-                }).then((result) => {
-                    // Check if the "OK" button was clicked
-                    if (result.isConfirmed) {
-                        // Redirect to the desired page
-                        window.location.href = "/apply";
-                    }
-                });
-
-                // Submit the form (if needed)
-                // document.getElementById("your-form-id").submit();
-            }
-        });
+            const cardElement = document.querySelector(".card");
+            cardElement.appendChild(alertElement);
+        }
     });
+
+
 </script>
 
 

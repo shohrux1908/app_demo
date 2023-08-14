@@ -87,21 +87,23 @@ form .input-box span.details{
    display: none;
  }
  form .button{
-   height: 45px;
-   margin: 35px;
+   height: 65px;
+   margin: 45px;
  }
  form .button input{
-   height: 100%;
-   width: 100%;
-   border-radius: 5px;
-   border: none;
-   color: #fff;
-   font-size: 18px;
-   font-weight: 500;
-   letter-spacing: 1px;
-   cursor: pointer;
-   transition: all 0.3s ease;
-   background: linear-gradient(135deg, #2054c5, #380c4b);
+     margin-top: -9%;
+     margin-left: 30%;
+     height: 70%;
+     width: 40%;
+     border-radius: 5px;
+     border: 5px;
+     color: #fff;
+     font-size: 18px;
+     font-weight: 500;
+     letter-spacing: 1px;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     background: linear-gradient(135deg, #2054c5, #380c4b);
  }
  form .button input:hover{
   /* transform: scale(0.99); */
@@ -128,4 +130,14 @@ form .user-details .input-box{
   .container .content .category{
     flex-direction: column;
   }
+}
+.return-link {
+    color: #007bff; /* O'q rang */
+    text-decoration: none; /* Underline yo'q */
+    font-weight: bold; /* Qalin shrift */
+}
+
+.return-link:hover {
+    color: #0056b3; /* O'q rang hover bo'lganida */
+    text-decoration: underline; /* Underline chiqadi hover bo'lganida */
 }

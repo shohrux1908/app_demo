@@ -47,7 +47,7 @@ public class DataLoader implements CommandLineRunner {
                     "admin",
                     "",
                     passwordEncoder.encode( "890"),
-                    "1".getBytes(),
+
 
                     List.of(new Role("ROLE_ADMIN"))
 
@@ -55,7 +55,7 @@ public class DataLoader implements CommandLineRunner {
 
 
             ));
-            appRepository.save(new Application(1L,"","","","","","","","","","", 1L));
+            appRepository.save(new Application(1L,"","","","","","","","","","","", 1L));
 
 
 

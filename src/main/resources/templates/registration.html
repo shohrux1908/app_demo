@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Talabalar turar joyi murojaatlari</title>
+    <link href="/static/images/logo.png" rel="icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -13,9 +15,27 @@
 
     <!-- Main css -->
     <link rel="stylesheet" href="/static/css/stylel.css">
+    <style>
+    .custom-loader {
+        /* ... boshqa stil attributlari ... */
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+>
+    </style>
 </head>
 <body>
-
 <div class="main">
 
     <!-- Sign up form -->
@@ -33,63 +53,171 @@
                         <h2> <p class="text-success">Username allaqachon bor</p> </h2>
                     </div>
                     <form th:action="@{/registration}" th:method="post" th:object="${user}" id="userRegistrationForm" enctype="multipart/form-data">
+                        <!-- Inside your existing form -->
+                        <!-- Inside your existing form -->
                         <div class="form-group">
-                            <label ><i class="zmdi zmdi-account material-icons-name"></i></label>
-                            <input type="text" name="firstname"  th:field="*{firstname}"  placeholder="Ismingiz"/>
+                            <i class="zmdi zmdi-account-box"></i> &nbsp;<label  style="font-weight: bold; color: #3a1050;"> Ism</label>
+                            <input type="text" name="firstname" th:field="*{firstname}" placeholder="Ismingizni kiriting" />
                         </div>
+
                         <div class="form-group">
-                            <label ><i class="zmdi zmdi-account material-icons-name"></i></label>
-                            <input type="text" name="lastname"  th:field="*{lastname}"  placeholder="Familiyangiz"/>
+                            <i class="zmdi zmdi-account-box"></i>&nbsp;<label  style="font-weight: bold; color: #3a1050;"> Familiya</label>
+                            <input type="text" name="lastname" th:field="*{lastname}" placeholder="Familiyangizni kiriting" />
                         </div>
+
                         <div class="form-group">
-                            <label><i class="zmdi zmdi-email"></i></label>
-                            <input type="text" name="phoneNumber" th:field="*{phoneNumber}"  placeholder="Tefon raqamingiz kiriting "/>
+                            <i class="zmdi zmdi-phone"></i>&nbsp;<label  style="font-weight: bold; color: #3a1050;"> Telefon raqami</label>
+                            <input type="text" name="phoneNumber" th:field="*{phoneNumber}" placeholder="Tefon raqamingiz kiriting" />
                         </div>
+
                         <div class="form-group">
-                            <label><i class="zmdi zmdi-email"></i></label>
-                            <input type="text" th:field="*{email}" id="email" name="email" required onblur="checkUsername()">
-                            <span id="usernameExistsMessage" style="display: none; color: red;">Bu Login allaqachon mavjud</span>
+                            <i class="zmdi zmdi-account"></i>&nbsp;<label style="font-weight: bold; color: #3a1050;">Login</label>
+                            <input type="text" id="email" name="email" required onblur="checkEmail()" placeholder="Kirish uchun pochta manzilingizni kiriting" />
+                            <span id="emailExistsMessage" style="display: none; color: red;">Bu Login allaqachon mavjud</span>
                         </div>
+
                         <div class="form-group">
-                            <label><i class="zmdi zmdi-lock"></i></label>
-                            <input type="password" name="password"  th:field="*{password}"  id="pass" placeholder="Password"/>
+                            <i class="zmdi zmdi-lock"></i>&nbsp;<label  style="font-weight: bold; color: #3a1050;"> Parol</label>
+                            <input type="password" name="password" th:field="*{password}" id="pass" placeholder="Parol kiriting" />
                         </div>
 
                         <div class="form-group">
                             <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
-                            <label for="agree-term" class="label-agree-term"><span><span></span></span>Men barcha bayonotlarga qo'shilaman  <a href="#" class="term-service">Xizmat ko'rsatish shartlari</a></label>
+                            <label for="agree-term" class="label-agree-term">
+                                <span><span></span></span>Men barcha bayonotlarga qo'shilaman
+                                <a href="#" class="term-service">Xizmat ko'rsatish shartlari</a>
+                            </label>
                         </div>
+
                         <div class="form-group form-button">
-                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                            <input type="submit" name="signup" id="submit-btn" class="form-submit" value="Register"/>
                         </div>
                     </form>
                 </div>
                 <div class="signup-image">
-                    <figure><img src="/static/images/signup-image.jpg" alt="sing up image"></figure>
-                    <a th:href="@{/login}" class="signup-image-link">Men allaqachon ro'yxatdan o'tganman</a>
+                    <figure><img src="/static/images/logo.png" alt="sing up image"></figure>
+                    <span class="login100-form-title"> NamMQI Talabalar turar joyiga online ariza yuborish tizimiga ro'yxatdan o'tish</span>
+                    <a th:href="@{/login}" style="color: green" class="signup-image-link">Tizimga kirish</a>
+                    <a class="signup-image-link">Allaqachon ro'yxatdan o'tganman</a>
+
                     <a  th:href="@{/}" class="signup-image-link">Bosh Sahifaga qaytish</a>
                 </div>
             </div>
         </div>
     </section>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+
+
+<!-- ... Sizning HTML kodlaringiz ... -->
 
 <script>
-    function checkUsername() {
+
+    function checkEmail() {
         const email = document.getElementById('email').value;
-        fetch('/api/check-email/' + email)
+
+        fetch('/registration/check-email/' + email)
             .then(response => {
-                if (response.ok) {
-                    document.getElementById('usernameExistsMessage').style.display = 'none';
+                if (!response.ok) {
+                    response.text().then(errorMessage => {
+                        showErrorMessage(errorMessage);
+                    });
                 } else {
-                    document.getElementById('usernameExistsMessage').style.display = 'block';
+                    hideErrorMessage();
                 }
             })
             .catch(error => {
                 console.error(error);
             });
     }
+
+    function showErrorMessage(errorMessage) {
+        document.getElementById('emailExistsMessage').style.display = 'block';
+        document.getElementById('emailExistsMessage').innerText = errorMessage;
+    }
+
+    function hideErrorMessage() {
+        document.getElementById('emailExistsMessage').style.display = 'none';
+    }
+    // JavaScript kodi
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const submitButton = document.getElementById("submit-btn");
+
+        submitButton.addEventListener("click", async function (event) {
+            event.preventDefault();
+
+            const agreeCheckbox = document.getElementById("agree-term");
+            if (!agreeCheckbox.checked) {
+                Swal.fire({
+                    title: "Xizmat shartlarini qabul qilmadingiz!",
+                    text: "Barcha bayonotlarga rozi emassiz.",
+                    icon: "error"
+                });
+                return;
+            }
+
+            const loadingMessage = Swal.fire({
+                title: "Iltimos, kuting...",
+                icon: "info",
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                onBeforeOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            try {
+                const formElement = document.getElementById("userRegistrationForm");
+                const formData = new FormData(formElement);
+
+                const response = await fetch("/registration", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                loadingMessage.close();
+
+                if (data.success) {
+                    Swal.fire({
+                        title: "Siz muvaffaqiyatli hisob yaratdingiz!",
+                        text: "Login va parolingiz eslab qo'ling. Ular orqali tizimga kirishingiz mumkin",
+                        icon: "success"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/login";
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: "Xatolik yuz berdi!",
+                        text: "Mazkur xatolik sababli hisob yaratib bo'lmadi.",
+                        icon: "error"
+                    });
+                }
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
 </script>
+
+<!-- ... Sizning HTML kodlaringiz ... -->
+
+
 
 
 <script src="/static/vendor/jquery/jquery.min.js"></script>

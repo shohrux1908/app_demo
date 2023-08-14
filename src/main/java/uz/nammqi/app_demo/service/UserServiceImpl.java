@@ -116,4 +116,30 @@ public class UserServiceImpl implements UserService{
         return  applications.stream().map((application -> converEntytyMessage(application)))
                 .collect(Collectors.toList());
     }
+
+     // ...
+
+
+
+
+
+    @Override
+    public boolean checkIfEmailExists(String email) {
+        User user = userRepository.findByEmail(email);
+        return user != null;
+    }
+
+    @Override
+    public void save(User user) {
+        boolean emailExists = checkIfEmailExists(user.getEmail());
+
+        if (emailExists) {
+            throw new IllegalArgumentException("Bu email allaqachon ro'yxatdan o'tgan");
+        }
+
+        userRepository.save(user);
+    }
+
+
+
 }
